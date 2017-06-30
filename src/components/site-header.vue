@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar light>
+  <v-toolbar light fixed>
     <v-toolbar-title v-text="title"></v-toolbar-title>
     <v-toolbar-items>
       <v-toolbar-item ripple to="/" exact>
