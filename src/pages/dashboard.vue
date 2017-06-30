@@ -1,24 +1,20 @@
 <template>
-  <v-layout row>
-    <v-flex xs12>
-      <v-card>
-        <v-list two-line>
-          <v-list-item v-for="(item, index) in instances" v-bind:key="item.workflow_name">
-            <v-list-tile avatar ripple>
-              <v-list-tile-content>
-                <v-list-tile-title>{{ item.workflow_name }}</v-list-tile-title>
-                <v-list-tile-sub-title>{{ item.run_at | timeago }}</v-list-tile-sub-title>
-              </v-list-tile-content>
-              <v-list-tile-avatar>
-                <instance-status :status="item.status"></instance-status>
-              </v-list-tile-avatar>
-            </v-list-tile>
-            <v-divider v-if="index + 1 < instances.length"></v-divider>
-          </v-list-item>
-        </v-list>
-      </v-card>
-    </v-flex>
-  </v-layout>
+  <v-card>
+    <v-list two-line>
+      <v-list-item v-for="(item, index) in instances" v-bind:key="item.workflow_name">
+        <v-list-tile avatar ripple>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ item.workflow_name }}</v-list-tile-title>
+            <v-list-tile-sub-title>{{ item.run_at | timeago }}</v-list-tile-sub-title>
+          </v-list-tile-content>
+          <v-list-tile-avatar>
+            <instance-status :status="item.status"></instance-status>
+          </v-list-tile-avatar>
+        </v-list-tile>
+        <v-divider v-if="index + 1 < instances.length"></v-divider>
+      </v-list-item>
+    </v-list>
+  </v-card>
 </template>
 
 <script>

@@ -2,9 +2,7 @@
   <v-app>
     <site-header title="Taskflow"></site-header>
     <main>
-      <v-container fluid>
-        <router-view></router-view>
-      </v-container>
+      <router-view></router-view>
     </main>
   </v-app>
 </template>
