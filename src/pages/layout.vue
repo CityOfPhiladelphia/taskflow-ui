@@ -2,7 +2,9 @@
   <v-app>
     <site-header title="Taskflow" :username="username"></site-header>
     <main>
-      <router-view></router-view>
+      <v-container fluid>
+        <router-view></router-view>
+      </v-container>
     </main>
   </v-app>
 </template>

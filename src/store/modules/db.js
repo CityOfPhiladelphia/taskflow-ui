@@ -15,13 +15,12 @@ export default {
   },
   actions: {
     async getRecurringLatest ({ commit }) {
-      let instances
       try {
-        instances = await api.getRecurringLatest()
+        const instances = await api.getRecurringLatest()
+        commit('receiveRecurringLatest', instances)
       } catch (err) {
-        console.error(err)
+        console.error('Failed to get recurring latest', err)
       }
-      commit('receiveRecurringLatest', instances)
     }
   }
 }
