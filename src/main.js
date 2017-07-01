@@ -5,11 +5,15 @@ import store from './store'
 import router from './router'
 import Layout from './pages/layout.vue'
 
-Vue.use(Vuetify)
+(async function () {
+  await store.dispatch('getStoredAuth') // TODO: Better place for this?
 
-new Vue({ // eslint-disable-line
-  el: '#app',
-  store,
-  router,
-  render: h => h(Layout)
-})
+  Vue.use(Vuetify)
+
+  new Vue({ // eslint-disable-line
+    el: '#app',
+    store,
+    router,
+    render: h => h(Layout)
+  })
+})()

@@ -11,10 +11,20 @@
       <v-toolbar-item ripple to="/tasks" router>
         Tasks
       </v-toolbar-item>
-      <v-toolbar-item v-if="username" ripple to="/profile" router>
-        <v-icon light>account_circle</v-icon>
-        {{ username }}
-      </v-toolbar-item>
+      <v-menu v-if="username" left bottom offset-y origin="bottom right" transition="v-slide-y-transition">
+        <v-btn light icon slot="activator">
+          <v-icon>account_circle</v-icon>
+        </v-btn>
+        <v-list>
+          <v-list-item>
+            <v-list-tile>
+              <router-link tag="v-list-tile-title" to="/logout">
+                Logout {{ username }}
+              </router-link>
+            </v-list-tile>
+          </v-list-item>
+        </v-list>
+      </v-menu>
       <v-toolbar-item v-else ripple to="/login" router>
         Login
       </v-toolbar-item>

@@ -3,17 +3,35 @@ import VueRouter from 'vue-router'
 
 import Dashboard from '../pages/dashboard.vue'
 import Login from '../pages/login.vue'
+import store from '../store'
 
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/', component: Dashboard },
-  { path: '/login', component: Login }
+  { path: '/', component: Dashboard, beforeEnter: auth },
+  { path: '/login', component: Login },
+  { path: '/logout', beforeEnter: logout }
 ]
 
 const router = new VueRouter({
   mode: 'history',
   routes
 })
+
+function auth (to, from, next) {
+  if (!store.state.auth.isLoggedIn) {
+    next({
+      path: '/login',
+      query: { redirect: to.fullPath }
+    })
+  } else {
+    next()
+  }
+}
+
+async function logout (to, from, next) {
+  await store.dispatch('logout')
+  next('/login')
+}
 
 export default router
