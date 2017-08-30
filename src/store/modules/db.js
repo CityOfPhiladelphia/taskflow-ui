@@ -1,6 +1,6 @@
-import api from '../../api/mock'
+import eres from 'eres'
 
-export default {
+export default (api) => ({
   state: {
     workflows: [],
     tasks: [],
@@ -15,12 +15,10 @@ export default {
   },
   actions: {
     async getRecurringLatest ({ commit }) {
-      try {
-        const instances = await api.getRecurringLatest()
-        commit('receiveRecurringLatest', instances)
-      } catch (err) {
-        console.error('Failed to get recurring latest', err)
-      }
+      const [err, result] = await eres(api.getRecurringLatest())
+      if (err) return console.error('Failed to fetch recurring latest', err)
+
+      commit('receiveRecurringLatest', result.data)
     }
   }
-}
+})

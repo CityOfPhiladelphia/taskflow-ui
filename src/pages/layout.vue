@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <site-header title="Taskflow" :username="username"></site-header>
+    <site-header title="Taskflow" :isloggedin="isLoggedIn"></site-header>
     <main>
       <v-container fluid>
         <router-view></router-view>
@@ -16,7 +16,7 @@ import SiteHeader from '../components/site-header.vue'
 
 export default {
   computed: mapState({
-    username: (state) => state.auth.user.name
+    isLoggedIn: (state) => state.auth.isLoggedIn
   }),
   components: {
     'site-header': SiteHeader

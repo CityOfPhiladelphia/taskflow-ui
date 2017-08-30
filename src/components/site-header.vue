@@ -11,7 +11,7 @@
       <v-toolbar-item ripple to="/tasks" router>
         Tasks
       </v-toolbar-item>
-      <v-menu v-if="username" left bottom offset-y origin="bottom right" transition="v-slide-y-transition">
+      <v-menu v-if="isloggedin" left bottom offset-y origin="bottom right" transition="v-slide-y-transition">
         <v-btn light icon slot="activator">
           <v-icon>account_circle</v-icon>
         </v-btn>
@@ -19,7 +19,7 @@
           <v-list-item>
             <v-list-tile>
               <router-link tag="v-list-tile-title" to="/logout">
-                Logout {{ username }}
+                Logout
               </router-link>
             </v-list-tile>
           </v-list-item>
@@ -36,7 +36,7 @@
 export default {
   props: [
     'title',
-    'username'
+    'isloggedin'
   ]
 }
 </script>
