@@ -2,33 +2,38 @@
   <div>
     <h2 class="display-1">Recurring tasks and workflows</h2>
     <v-card>
-      <v-list two-line>
-        <v-list-item v-for="(item, index) in instances" v-bind:key="item.workflow_name">
-          <v-list-tile avatar ripple>
-            <v-list-tile-content>
-              <v-list-tile-title>{{ item.workflow_name }}</v-list-tile-title>
-              <v-list-tile-sub-title>{{ item.run_at | timeago }}</v-list-tile-sub-title>
-            </v-list-tile-content>
-            <v-list-tile-avatar>
-              <instance-status :status="item.status"></instance-status>
-            </v-list-tile-avatar>
-          </v-list-tile>
-          <v-divider v-if="index + 1 < instances.length"></v-divider>
-        </v-list-item>
-      </v-list>
+      <v-data-table
+        :headers="headers"
+        :items="instances"
+        hide-actions
+        class="elevation-1">
+        <template slot="items" scope="props">
+          <td>{{ props.item.workflow_name }}</td>
+          <td>{{ props.item.run_at }}</td>
+          <td class="text-xs-right">
+            <instance-status :status="props.item.status"></instance-status>
+          </td>
+        </template>
+      </v-data-table>
     </v-card>
   </div>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import Timeago from 'timeago.js'
 
 import InstanceStatus from '../components/instance-status.vue'
 
-const timeagoInstance = Timeago()
-
 export default {
+  data () {
+    return {
+      headers: [
+        { text: 'Workflow', value: 'workflow_name', align: 'left' },
+        { text: 'Run at', value: 'run_at', align: 'left' },
+        { text: 'Status', value: 'status' }
+      ]
+    }
+  },
   computed: {
     ...mapState({
       instances: (state) => state.db.recurringLatest
@@ -38,11 +43,6 @@ export default {
     ...mapActions([
       'getRecurringLatest'
     ])
-  },
-  filters: {
-    timeago (datetime) {
-      return timeagoInstance.format(datetime)
-    }
   },
   created () {
     this.getRecurringLatest()
