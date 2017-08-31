@@ -1,33 +1,39 @@
 <template>
-  <v-toolbar light fixed>
+  <v-toolbar fixed>
+
     <v-toolbar-title v-text="title"></v-toolbar-title>
+
+    <v-spacer></v-spacer>
+
     <v-toolbar-items class="hidden-xs-only">
-      <v-toolbar-item ripple to="/" exact router>
+
+      <v-btn to="/" exact router>
         Dashboard
-      </v-toolbar-item>
-      <v-toolbar-item ripple to="/workflows" router>
+      </v-btn>
+      <v-btn to="/workflows" router>
         Workflows
-      </v-toolbar-item>
-      <v-toolbar-item ripple to="/tasks" router>
+      </v-btn>
+      <v-btn to="/tasks" router>
         Tasks
-      </v-toolbar-item>
+      </v-btn>
+
       <v-menu v-if="isloggedin" left bottom offset-y origin="bottom right" transition="v-slide-y-transition">
         <v-btn light icon slot="activator">
           <v-icon>account_circle</v-icon>
         </v-btn>
         <v-list>
-          <v-list-item>
-            <v-list-tile>
-              <router-link tag="v-list-tile-title" to="/logout">
-                Logout
-              </router-link>
-            </v-list-tile>
-          </v-list-item>
+          <v-list-tile>
+            <router-link tag="v-list-tile-title" to="/logout">
+              Logout
+            </router-link>
+          </v-list-tile>
         </v-list>
       </v-menu>
-      <v-toolbar-item v-else ripple to="/login" router>
+
+      <v-btn v-else to="/login" router>
         Login
-      </v-toolbar-item>
+      </v-btn>
+
     </v-toolbar-items>
   </v-toolbar>
 </template>

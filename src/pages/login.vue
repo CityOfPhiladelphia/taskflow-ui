@@ -11,7 +11,7 @@
             label="Password"
             type="password"
             v-model="password"></v-text-field>
-          <v-btn primary light type="submit">
+          <v-btn primary type="submit">
             Login
           </v-btn>
         </form>
