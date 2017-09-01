@@ -1,5 +1,3 @@
-import eres from 'eres'
-
 export default (api) => ({
   state: {
     workflows: [],
@@ -15,8 +13,13 @@ export default (api) => ({
   },
   actions: {
     async getRecurringLatest ({ commit }) {
-      const [err, result] = await eres(api.getRecurringLatest())
-      if (err) return console.error('Failed to fetch recurring latest', err)
+      let result
+      try {
+        result = await api.getRecurringLatest()
+      } catch (err) {
+        console.error('Failed to fetch recurring latest', err)
+        return
+      }
 
       commit('receiveRecurringLatest', result.data)
     }
