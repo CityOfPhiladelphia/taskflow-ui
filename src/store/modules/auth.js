@@ -25,18 +25,18 @@ export default (api) => ({
       try {
         result = await localForage.getItem('auth')
       } catch (err) {
-        console.error('Error fetching stored csrf token', err)
         return
       }
 
       if (result) commit('receiveAuth', result)
     },
-    async login ({ commit }, { username, password }) {
+    async login ({ commit, dispatch }, { username, password }) {
       let result
       try {
         result = await api.login(username, password)
       } catch (err) {
         console.error('Login error', err)
+        dispatch('notify', { msg: 'Invalid login' })
         return
       }
 

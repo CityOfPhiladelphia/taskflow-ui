@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import Api from '../api'
 import DB from './modules/db'
 import Auth from './modules/auth'
+import ui from './modules/ui'
 
 Vue.use(Vuex)
 
@@ -14,7 +15,8 @@ const api = new Api(API_BASE_URL)
 const store = new Vuex.Store({
   modules: {
     db: DB(api),
-    auth: Auth(api)
+    auth: Auth(api),
+    ui
   },
   strict: DEBUG
 })

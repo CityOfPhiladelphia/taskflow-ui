@@ -12,12 +12,12 @@ export default (api) => ({
     }
   },
   actions: {
-    async getRecurringLatest ({ commit }) {
+    async getRecurringLatest ({ commit, dispatch }) {
       let result
       try {
         result = await api.getRecurringLatest()
       } catch (err) {
-        console.error('Failed to fetch recurring latest', err)
+        dispatch('notify', { msg: `Failed to retreive instances from server` })
         return
       }
 
