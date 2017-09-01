@@ -23,4 +23,8 @@ export default class Api {
   getRecurringLatest () {
     return this.axios.get('/workflow-instances/recurring-latest')
   }
+
+  getWorkflows () {
+    return this.axios.get('/workflows')
+  }
 }
