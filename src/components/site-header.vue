@@ -13,9 +13,6 @@
       <v-btn to="/workflows" router>
         Workflows
       </v-btn>
-      <v-btn to="/tasks" router>
-        Tasks
-      </v-btn>
 
       <v-menu v-if="isloggedin" left bottom offset-y origin="bottom right" transition="v-slide-y-transition">
         <v-btn light icon slot="activator">
