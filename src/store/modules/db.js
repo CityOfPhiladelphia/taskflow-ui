@@ -1,3 +1,5 @@
+import router from '../../router'
+
 export default (api) => ({
   state: {
     workflows: [],
@@ -17,7 +19,12 @@ export default (api) => ({
       try {
         result = await api.getRecurringLatest()
       } catch (err) {
-        dispatch('notify', { msg: `Failed to retreive instances from server` })
+        if (err.response.status === 401) {
+          commit('resetAuth')
+          router.push('/login')
+        } else {
+          dispatch('notify', { msg: `Failed to retreive instances from server` })
+        }
         return
       }
 

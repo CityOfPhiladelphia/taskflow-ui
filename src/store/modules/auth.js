@@ -64,6 +64,7 @@ export default (api) => ({
       }
 
       commit('resetAuth')
+      router.push('/login')
     }
   }
 })
